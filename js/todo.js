@@ -21,7 +21,7 @@ function checkTodoCount() {
     }
 }
 
-//
+// Функция для добавления задач
 function addTask(evt) {
     evt.preventDefault();
     const taskInput = document.querySelector('#taskText');
