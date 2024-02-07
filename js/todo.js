@@ -7,6 +7,8 @@ taskForm.addEventListener('submit', addTask);
 todoList.addEventListener('click', toggleCompleteTask);
 todoList.addEventListener('click', deleteTask);
 
+const tasks = [];
+
 function addTask(evt) {
     evt.preventDefault();
     const taskText = taskInput.value.trim();
@@ -18,6 +20,8 @@ function addTask(evt) {
         text: taskText,
         isCompleted: false,
     };
+
+    tasks.push(task);
 
     const classesForCompleted = task.isCompleted ? 'text-decoration-line-through bg-light' : '';
 
@@ -59,6 +63,16 @@ function toggleCompleteTask(evt) {
     }
     const doneBtn = evt.target;
     const parentLi = doneBtn.closest('li');
+    const taskId = parentLi.id;
+    for (let index = 0; index < tasks.length; index++) {
+        const task = tasks[index];
+        if (task.id == taskId) {
+            //                 !false => true
+            //                 !true  => false
+            task.isCompleted = !task.isCompleted;
+            break;
+        }
+    }
 
     parentLi.classList.toggle('text-decoration-line-through');
     parentLi.classList.toggle('bg-light');
@@ -71,6 +85,15 @@ function deleteTask(evt) {
     }
     const deleteBtn = evt.target;
     const parentLi = deleteBtn.closest('li');
+    const taskId = parentLi.id;
+    for (let index = 0; index < tasks.length; index++) {
+        const task = tasks[index];
+        if (task.id == taskId) {
+            tasks.splice(index, 1);
+            break;
+        }
+    }
+
     parentLi.remove();
 
     if (todoList.children.length == 1) {
