@@ -2,10 +2,12 @@ const taskForm = document.querySelector('#taskForm');
 const taskInput = document.querySelector('#taskText');
 const todoList = document.querySelector('#todoList');
 const emptyList = todoList.querySelector('#emptyList');
+const clearCacheBtn = document.querySelector('#clearCache');
 
 taskForm.addEventListener('submit', addTask);
 todoList.addEventListener('click', toggleCompleteTask);
 todoList.addEventListener('click', deleteTask);
+clearCacheBtn.addEventListener('click', clearCacheFromLS);
 
 const tasks = [];
 const tasksFromLS = JSON.parse(localStorage.getItem('tasks'));
@@ -112,5 +114,13 @@ function renderTask(task) {
     );
     if (todoList.children.length > 1) {
         emptyList.classList.add('d-none');
+    }
+}
+
+function clearCacheFromLS() {
+    const agree = confirm('Вы уверены? Это удалит все ваши данные о задач');
+    if (agree) {
+        localStorage.clear();
+        window.location.reload();
     }
 }
