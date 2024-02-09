@@ -124,3 +124,4 @@ function clearCacheFromLS() {
         window.location.reload();
     }
 }
+
